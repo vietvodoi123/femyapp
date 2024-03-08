@@ -1,7 +1,6 @@
 import Link from "next/link";
 import MainHeader from "./component/home/MainHeader";
 import MainNav from "./component/home/MainNav";
-import MainSuggest from "./component/home/MainSuggest";
 import { Suspense } from "react";
 import { Skeleton } from "antd";
 import ListItems from "./component/ui/ListItems";
