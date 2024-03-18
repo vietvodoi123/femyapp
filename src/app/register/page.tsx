@@ -1,53 +1,53 @@
-"use client";
-import { Button, Form, Input, Skeleton, Space, notification } from "antd";
-import { FaLock } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import { IoMdMail } from "react-icons/io";
-import Link from "next/link";
-import { UserApi } from "@/api/UserFetcher";
-import { useRouter } from "next/navigation";
-type Props = {};
+'use client'
+import { Button, Form, Input, Skeleton, Space, notification } from 'antd'
+import { FaLock } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { useFormik } from 'formik'
+import { IoMdMail } from 'react-icons/io'
+import Link from 'next/link'
+import { UserApi } from '@/api/UserFetcher'
+import { useRouter } from 'next/navigation'
+type Props = {}
 
 function page({}: Props) {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     onSubmit: (values) => {
-      setLoading(true);
+      setLoading(true)
       const create: IUserCreate = {
         fullName: values.fullName,
         email: values.email,
         password: values.password,
-      };
+      }
       UserApi.signup(create)
         .then((data) => {
-          console.log(data);
+          console.log(data)
           notification.success({
-            message: "Đăng Ký Thành Công!",
-            description: "Hãy Đăng Nhập Để Tiếp Tục!",
-          });
-          router.push("/login");
+            message: 'Đăng Ký Thành Công!',
+            description: 'Hãy Đăng Nhập Để Tiếp Tục!',
+          })
+          router.push('/login')
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
           notification.error({
-            message: "Có Lỗi Xảy Ra!",
-            description: "Hãy Kiểm Tra Lại!",
-          });
-        });
-      setLoading(false);
+            message: 'Có Lỗi Xảy Ra!',
+            description: 'Hãy Kiểm Tra Lại!',
+          })
+        })
+      setLoading(false)
     },
-  });
+  })
   return (
-    <main className="mx-auto w-[1280px] py-10">
+    <main className="mx-auto w-[1280px] py-10 h-[90vh]">
       <h2 className=" text-xl font-bold mb-3">Đăng Ký Tài Khoản</h2>
       <p className=" text-sm">Bắt Đầu Tạo Tài Khoản Miễn Phí!</p>
       <div className=" grid grid-cols-2 gap-5">
@@ -63,7 +63,7 @@ function page({}: Props) {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập Tên Người Dùng!",
+                  message: 'Vui lòng nhập Tên Người Dùng!',
                 },
               ]}
             >
@@ -75,7 +75,7 @@ function page({}: Props) {
                   size="large"
                   value={formik.values.fullName}
                   onChange={(e) =>
-                    formik.setFieldValue("fullName", e.target.value)
+                    formik.setFieldValue('fullName', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -85,8 +85,8 @@ function page({}: Props) {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập địa chỉ email!",
-                  type: "email",
+                  message: 'Vui lòng nhập địa chỉ email!',
+                  type: 'email',
                 },
               ]}
             >
@@ -98,7 +98,7 @@ function page({}: Props) {
                   size="large"
                   value={formik.values.email}
                   onChange={(e) =>
-                    formik.setFieldValue("email", e.target.value)
+                    formik.setFieldValue('email', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -109,7 +109,7 @@ function page({}: Props) {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập mật khẩu!",
+                  message: 'Vui lòng nhập mật khẩu!',
                 },
               ]}
             >
@@ -121,7 +121,7 @@ function page({}: Props) {
                   size="large"
                   value={formik.values.password}
                   onChange={(e) =>
-                    formik.setFieldValue("password", e.target.value)
+                    formik.setFieldValue('password', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -132,14 +132,14 @@ function page({}: Props) {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập lại mật khẩu!",
+                  message: 'Vui lòng nhập lại mật khẩu!',
                 },
                 {
                   validator: (_, value) => {
                     if (value !== formik.values.password) {
-                      return Promise.reject("Mật khẩu không khớp!");
+                      return Promise.reject('Mật khẩu không khớp!')
                     }
-                    return Promise.resolve();
+                    return Promise.resolve()
                   },
                 },
               ]}
@@ -152,7 +152,7 @@ function page({}: Props) {
                   size="large"
                   value={formik.values.confirmPassword}
                   onChange={(e) =>
-                    formik.setFieldValue("confirmPassword", e.target.value)
+                    formik.setFieldValue('confirmPassword', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -181,7 +181,7 @@ function page({}: Props) {
         </div>
       </div>
     </main>
-  );
+  )
 }
 
-export default page;
+export default page

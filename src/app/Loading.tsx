@@ -1,10 +1,10 @@
-import { Skeleton } from "antd";
-import React from "react";
+import { Spin } from 'antd'
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 function Loading({}: Props) {
-  return <Skeleton />;
+  return <Spin />
 }
 
-export default Loading;
+export default Loading

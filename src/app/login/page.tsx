@@ -1,53 +1,53 @@
-"use client";
-import { Button, Form, Input, Skeleton, Space, notification } from "antd";
-import { FaLock } from "react-icons/fa";
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import { IoMdMail } from "react-icons/io";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { UserApi } from "@/api/UserFetcher";
-import { useDispatch } from "react-redux";
-import { login } from "../store/slice/UserSlice";
+'use client'
+import { Button, Form, Input, Skeleton, Space, notification } from 'antd'
+import { FaLock } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { useFormik } from 'formik'
+import { IoMdMail } from 'react-icons/io'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { UserApi } from '@/api/UserFetcher'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/slice/UserSlice'
 
 function page() {
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     onSubmit: (values) => {
-      setLoading(true);
+      setLoading(true)
       const data: ILoginBody = {
         email: values.email,
         password: values.password,
-      };
+      }
       UserApi.login(data)
         .then((data: Auth | ErrorResponse) => {
-          console.log(data);
+          console.log(data)
 
-          if (data && "status" in data && "email" in data && "token" in data) {
-            dispatch(login(data));
-            router.push("/");
+          if (data && 'status' in data && 'email' in data && 'token' in data) {
+            dispatch(login(data))
+            router.push('/')
             notification.success({
-              message: "Đăng Nhập Thành Công!",
-              description: "Bắt Đầu Mua Sắm Nào!",
-            });
+              message: 'Đăng Nhập Thành Công!',
+              description: 'Bắt Đầu Mua Sắm Nào!',
+            })
           }
         })
         .catch((err: ApiResponse<UserData>) => {
           notification.error({
-            message: "Có Lỗi Xảy Ra!",
-          });
-        });
-      setLoading(false);
+            message: 'Có Lỗi Xảy Ra!',
+          })
+        })
+      setLoading(false)
     },
-  });
+  })
   return (
-    <main className="mx-auto w-[1280px] py-10">
+    <main className="mx-auto w-[1280px] py-10 h-[90vh]">
       <h2 className=" text-xl font-bold mb-3">Đăng Nhập Vào MyShop</h2>
       <div className=" grid grid-cols-2 gap-5">
         {loading ? (
@@ -62,8 +62,8 @@ function page() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập địa chỉ email!",
-                  type: "email",
+                  message: 'Vui lòng nhập địa chỉ email!',
+                  type: 'email',
                 },
               ]}
             >
@@ -75,7 +75,7 @@ function page() {
                   size="large"
                   value={formik.values.email}
                   onChange={(e) =>
-                    formik.setFieldValue("email", e.target.value)
+                    formik.setFieldValue('email', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -86,7 +86,7 @@ function page() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập mật khẩu!",
+                  message: 'Vui lòng nhập mật khẩu!',
                 },
               ]}
             >
@@ -98,7 +98,7 @@ function page() {
                   size="large"
                   value={formik.values.password}
                   onChange={(e) =>
-                    formik.setFieldValue("password", e.target.value)
+                    formik.setFieldValue('password', e.target.value)
                   }
                 />
               </Space.Compact>
@@ -129,7 +129,7 @@ function page() {
         </div>
       </div>
     </main>
-  );
+  )
 }
 
-export default page;
+export default page
