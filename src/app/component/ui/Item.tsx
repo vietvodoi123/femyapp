@@ -1,21 +1,21 @@
-"use client";
-import React, { Suspense } from "react";
-import Image from "next/image";
-import { Skeleton } from "antd";
-import { useRouter } from "next/navigation";
-import { transformMoney } from "@/utils/function/transformMoney";
+'use client'
+import React, { Suspense } from 'react'
+import Image from 'next/image'
+import { Skeleton } from 'antd'
+import { useRouter } from 'next/navigation'
+import { transformMoney } from '@/utils/function/transformMoney'
 
 type Props = {
-  item: IItem;
-};
+  item: IItem
+}
 
 function Item({ item }: Props) {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <div
       onClick={() => router.push(`/product/${item._id}`)}
       key={item._id}
-      className=" bg-white hover:border-solid hover:border-[0.3px] hover:border-blue-500 shadow-sm relative cursor-pointer"
+      className=" bg-white hover:border-solid hover:border-[0.3px] hover:border-blue-500 shadow-sm relative cursor-pointer border-solid border-[0.3px] border-gray-200"
     >
       <p className=" absolute left-[-3px] top-3 bg-red-500 text-[10px] text-white py-[2px] px-2">
         Yêu Thích
@@ -23,16 +23,18 @@ function Item({ item }: Props) {
       <p className=" absolute right-0 top-0 bg-yellow-300 text-white text-xs py-1 px-2 opacity-90">
         -20%
       </p>
-      <div className="w-full h-[200px]">
-        <Suspense fallback={<Skeleton />}>
-          <Image
-            src={item.imageUrl[0]}
-            alt={item.name}
-            width={200}
-            height={200}
-          />
-        </Suspense>
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <Image
+          src={item.imageUrl[0]}
+          alt={item.name}
+          width={200}
+          height={200}
+          layout="fixed"
+          objectFit="contain"
+          className="h-full"
+        />
       </div>
+
       <div className=" p-2 text-sm">
         <p className=" line-clamp-2 mb-1 min-h-[2em]">{item.name}</p>
 
@@ -50,7 +52,7 @@ function Item({ item }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Item;
+export default Item

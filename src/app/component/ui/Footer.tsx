@@ -1,22 +1,22 @@
-import React from "react";
-import { FaGithub } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-type Props = {};
+import React from 'react'
+import { FaGithub } from 'react-icons/fa'
+import { FaTwitter } from 'react-icons/fa'
+import { FaInstagram } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
+type Props = {}
 
 function Footer({}: Props) {
   return (
-    <footer className="bg-gray1 border-t-4 border-solid border-blue-500">
-      <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+    <footer className=" border-t-4  bg-primary text-white">
+      <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8 ">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <h3 className=" text-3xl font-medium">MYSHOP</h3>
-            <p className="max-w-xs mt-4 text-sm text-gray-600">
+            <p className="max-w-xs mt-4 text-sm ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
               accusantium.
             </p>
-            <div className="flex mt-8 space-x-6 text-gray-600">
+            <div className="flex mt-8 space-x-6 ">
               <a className="hover:opacity-75" target="_blank" rel="noreferrer">
                 <span className="sr-only"> Facebook </span>
                 <FaFacebook className="w-6 h-6" />
@@ -77,7 +77,7 @@ function Footer({}: Props) {
         <p className="mt-8 text-xs text-gray-800">© 2024 Viet Pham</p>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

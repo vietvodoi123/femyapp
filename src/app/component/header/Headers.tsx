@@ -1,55 +1,55 @@
-"use client";
-import Link from "next/link";
-import List from "./List";
-import React, { ChangeEvent, Suspense, useEffect, useState } from "react";
-import Search from "antd/es/input/Search";
-import { IoSearch } from "react-icons/io5";
-import User from "./User";
-import { Button, Spin, message } from "antd";
-import { ItemsApi } from "@/api/ItemsFetccher";
+'use client'
+import Link from 'next/link'
+import List from './List'
+import React, { ChangeEvent, Suspense, useEffect, useState } from 'react'
+import Search from 'antd/es/input/Search'
+import { IoSearch } from 'react-icons/io5'
+import User from './User'
+import { Button, Spin, message } from 'antd'
+import { ItemsApi } from '@/api/ItemsFetccher'
 import {
   useParams,
   usePathname,
   useRouter,
   useSearchParams,
-} from "next/navigation";
+} from 'next/navigation'
 
-type Props = {};
+type Props = {}
 
 function Headers({}: Props) {
   const [searchLists, setSearchList] =
-    useState<{ id: string; name: string }[]>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+    useState<{ id: string; name: string }[]>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const [searchValue, setSearchValue] = useState<string>('')
 
-  const router = useRouter();
-  const pathName = usePathname();
-  const params = useParams();
+  const router = useRouter()
+  const pathName = usePathname()
+  const params = useParams()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    setSearchValue(e.target.value)
 
-    setLoading(true);
+    setLoading(true)
     ItemsApi.getItems({ name: e.target.value, pageSize: 9 })
       .then((d: ApiResponse<IItem[]>) => {
-        if ("data" in d) {
+        if ('data' in d) {
           const arr = d.data.map((item) => {
             return {
               id: item._id,
               name: item.name,
-            };
-          });
-          setSearchList(arr);
+            }
+          })
+          setSearchList(arr)
         }
       })
-      .catch((e) => message.error(e));
-    setLoading(false);
-  };
+      .catch((e) => message.error(e))
+    setLoading(false)
+  }
   const handleSearch = (value: string) => {
-    router.push(`/daily_discovery/?search=${value}`);
-  };
+    router.push(`/daily_discovery/?search=${value}`)
+  }
   return (
-    <header className=" pt-3 pb-1 border-b-[#ccc] border-b-[1px] bg-blue-500 text-white relative">
+    <header className=" pt-3 pb-1 border-b-[#ccc] border-b-[1px] bg-primary text-white relative">
       <div className="m-auto w-[1280px] h-[50px] text-base flex justify-between items-center ">
         <Link href="/" className=" mr-3">
           <h1 className=" text-2xl text-start">MYSHOP</h1>
@@ -97,7 +97,7 @@ function Headers({}: Props) {
         </div>
       )}
     </header>
-  );
+  )
 }
 
-export default Headers;
+export default Headers

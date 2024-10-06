@@ -22,10 +22,10 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
   const param = useParams()
   const searchParams = useSearchParams()
   const searchKey = searchParams.get('search')
+  const sortBy = searchParams.get('sortBy') || undefined
+  const sortOrder = searchParams.get('sortOrder') || ''
 
   const [loading, setLoading] = useState(false)
-  const [sortBy, setSortBy] = useState<string | undefined>()
-  const [sortOrder, setSortOrder] = useState<string>('')
   const [items, setItems] = useState<SuccessResponse<IItem[]>>({
     data: [],
     page: 1,
@@ -33,8 +33,10 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
     totalPages: 0,
     totalRecords: 0,
   })
+
   const fetchData = useCallback(async () => {
     setLoading(true)
+
     const query: IGetItems = {
       page: items.page,
       pageSize: items.pageSize,
@@ -53,6 +55,7 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
         }
       }
     }
+
     if (param && 'shopId' in param) {
       query['creatorId'] = param['shopId'][0]
       query.sortBy = 'unitsSold'
@@ -61,46 +64,48 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
         query.pageSize = 12
       }
     }
+
     if (searchKey) {
       query['name'] = decodeURIComponent(searchKey)
     }
 
-    ItemsApi.getItems(query)
-      .then((d: SuccessResponse<IItem[]>) => {
-        console.log(d)
+    try {
+      const data = await ItemsApi.getItems(query)
+      setItems(data)
+    } catch (error) {
+      message.error('Failed to fetch items')
+    }
 
-        setItems(d)
-      })
-      .catch((e) => {
-        message.error(e)
-        console.log(e)
-      })
     setLoading(false)
-  }, [items.page, sortBy, sortOrder, searchParams.get('search')])
+  }, [
+    items.page,
+    items.pageSize,
+    sortBy,
+    sortOrder,
+    param,
+    category,
+    searchKey,
+  ])
 
+  // Fetch data when component mounts or query parameters change
   useEffect(() => {
     fetchData()
-  }, [fetchData, category])
+  }, [fetchData, searchParams])
 
   const handleChangePage = (page: number, pageSize: number) => {
-    const d: SuccessResponse<IItem[]> = {
-      ...items,
+    setItems((prevItems) => ({
+      ...prevItems,
       page: page,
       pageSize: pageSize,
-    }
-    setItems(d)
+    }))
   }
 
   return (
-    <section>
+    <section className=" pt-5">
       {(param['slug'] || nav) && (
         <NavSort
-          setPage={handleChangePage}
           page={items.page}
           totalPages={items.totalPages}
-          button={sortBy}
-          setButton={setSortBy}
-          setOrder={setSortOrder}
           width={width}
         />
       )}
@@ -113,19 +118,21 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
           <span className=" text-red-500">"{searchKey}"</span>
         </div>
       )}
-      {loading && <Spin />}
-      {!loading && items.data && items.data.length === 0 && <Empty />}
-      {!loading && items.data && items.data.length !== 0 && (
-        <div
-          className={`w-[${width || 1280}px] grid ${
-            col ? `grid-cols-5` : 'grid-cols-6'
-          } gap-3 mt-8 mx-auto`}
-        >
-          {items.data.map((item) => (
-            <Item item={item} />
-          ))}
-        </div>
-      )}
+      <div
+        className={`w-[${width || 1280}px]  ${
+          col ? `grid-cols-5` : 'grid-cols-6'
+        } gap-3 mt-8 mx-auto ${!loading ? 'grid' : 'flex justify-center items-start h-[200px]'}`}
+      >
+        {loading && <Spin size="large" />}
+        {!loading && items.data && items.data.length === 0 && <Empty />}
+        {!loading && items.data && items.data.length !== 0 && (
+          <>
+            {items.data.map((item) => (
+              <Item item={item} />
+            ))}
+          </>
+        )}
+      </div>
       {isPagi && (
         <div
           className={` w-[${

@@ -7,9 +7,9 @@ function page() {
   return (
     <main className=" bg-gray1">
       <MainHeader />
-      <Suspense fallback={<Skeleton />}>
+      
         <ListItems pagination={true} />
-      </Suspense>
+      
     </main>
   );
 }
