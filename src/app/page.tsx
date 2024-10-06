@@ -17,11 +17,8 @@ export default function Home() {
           GỢI Ý HÔM NAY
         </h3>
       </div>
-      <Suspense fallback={<Skeleton />}>
-        {/* <MainSuggest /> */}
 
-        <ListItems pagination={true} />
-      </Suspense>
+      <ListItems pagination={true} />
     </main>
   )
 }

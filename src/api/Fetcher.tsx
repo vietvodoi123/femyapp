@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 
 // https://backend1-wcev.onrender.com/api
 const axiosClient = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -71,6 +71,8 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
 
     try {
       const data = await ItemsApi.getItems(query)
+      console.log(data)
+
       setItems(data)
     } catch (error) {
       message.error('Failed to fetch items')
