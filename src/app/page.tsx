@@ -1,9 +1,7 @@
-import Link from 'next/link'
 import MainHeader from './component/home/MainHeader'
 import MainNav from './component/home/MainNav'
-import { Suspense } from 'react'
-import { Skeleton } from 'antd'
-import ListItems from './component/ui/ListItems'
+
+import ListItems from '@/app/component/ui/ListItems.jsx'
 
 export default function Home() {
   return (
@@ -18,7 +16,7 @@ export default function Home() {
         </h3>
       </div>
 
-      <ListItems pagination={true} />
+      <ListItems buttonDelivery={true} />
     </main>
   )
 }

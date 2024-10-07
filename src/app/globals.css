@@ -23,3 +23,7 @@
 body {
   color: #4b4b4b;
 }
+
+.border-base-03 {
+  @apply border-[0.3px] border-solid border-gray-200;
+}

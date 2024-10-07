@@ -15,7 +15,7 @@ function Item({ item }: Props) {
     <div
       onClick={() => router.push(`/product/${item._id}`)}
       key={item._id}
-      className=" bg-white hover:border-solid hover:border-[0.3px] hover:border-blue-500 shadow-sm relative cursor-pointer border-solid border-[0.3px] border-gray-200"
+      className=" bg-white hover:border-solid hover:border-[0.3px] hover:border-blue-500 shadow-sm relative cursor-pointer border-base-03"
     >
       <p className=" absolute left-[-3px] top-3 bg-red-500 text-[10px] text-white py-[2px] px-2">
         Yêu Thích

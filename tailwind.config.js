@@ -19,6 +19,16 @@ module.exports = {
       boxShadow: {
         shadow1: '',
       },
+      keyframes: {
+        smoothPing: {
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.9' },
+          '100%': { transform: 'scale(1.1)', opacity: '0.8' },
+        },
+      },
+      animation: {
+        smoothPing: 'smoothPing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
     },
   },
   plugins: [],

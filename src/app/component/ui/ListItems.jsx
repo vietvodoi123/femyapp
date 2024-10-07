@@ -6,19 +6,17 @@ import { ItemsApi } from '@/api/ItemsFetccher'
 import Item from './Item'
 import { IoIosInformationCircleOutline } from 'react-icons/io'
 import NavSort from './NavSort'
+import Link from 'next/link'
 
-interface Props {
-  pagination?: boolean
-  pageSize?: number
-  nav?: boolean
-  col?: number
-  width?: number
-  category?: string
-}
-
-function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
-  const isPagi = pagination ? true : false
-
+function ListItems({
+  pagination = false,
+  nav = undefined,
+  pageSize = undefined,
+  col = undefined,
+  width = undefined,
+  category = undefined,
+  buttonDelivery = false,
+}) {
   const param = useParams()
   const searchParams = useSearchParams()
   const searchKey = searchParams.get('search')
@@ -26,7 +24,7 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
   const sortOrder = searchParams.get('sortOrder') || ''
 
   const [loading, setLoading] = useState(false)
-  const [items, setItems] = useState<SuccessResponse<IItem[]>>({
+  const [items, setItems] = useState({
     data: [],
     page: 1,
     pageSize: pageSize || 18,
@@ -37,7 +35,7 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
   const fetchData = useCallback(async () => {
     setLoading(true)
 
-    const query: IGetItems = {
+    const query = {
       page: items.page,
       pageSize: items.pageSize,
       sortBy: sortBy,
@@ -71,7 +69,6 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
 
     try {
       const data = await ItemsApi.getItems(query)
-      console.log(data)
 
       setItems(data)
     } catch (error) {
@@ -94,7 +91,7 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
     fetchData()
   }, [fetchData, searchParams])
 
-  const handleChangePage = (page: number, pageSize: number) => {
+  const handleChangePage = (page, pageSize) => {
     setItems((prevItems) => ({
       ...prevItems,
       page: page,
@@ -135,7 +132,7 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
           </>
         )}
       </div>
-      {isPagi && (
+      {pagination && (
         <div
           className={` w-[${
             width || 1280
@@ -147,6 +144,16 @@ function ListItems({ pagination, nav, pageSize, col, width, category }: Props) {
             current={items.page}
             onChange={handleChangePage}
           />
+        </div>
+      )}
+      {buttonDelivery && (
+        <div className="flex justify-center items-center mt-5">
+          <Link
+            className=" bg-primary text-white px-4 py-2 rounded-md animate-smoothPing"
+            href="#"
+          >
+            Xem Thêm
+          </Link>
         </div>
       )}
     </section>

@@ -1,36 +1,25 @@
-"use client";
-import { Button } from "antd";
-import { IoStorefrontOutline } from "react-icons/io5";
-import { IoChatboxEllipses } from "react-icons/io5";
-import React from "react";
-import { useRouter } from "next/navigation";
+import { Button } from 'antd'
+import { IoStorefrontOutline } from 'react-icons/io5'
+import { IoChatboxEllipses } from 'react-icons/io5'
+import React from 'react'
 
-type Props = {
-  shop: IItemAndCreator;
-};
-
-function InforShop({ shop }: Props) {
-  const router = useRouter();
+function InforShop({ shop }) {
   return (
-    <div className=" mt-4 bg-white flex justify-start items-center p-5">
+    <div className=" mt-4 bg-white flex justify-start items-center p-5 border-base-03">
       <div className=" flex justify-between items-center gap-5 border-r-[3px] border-r-gray1 pr-5">
         <img
-          src={shop?.creatorInfo?.avatar || ""}
-          alt={shop?.creatorInfo?.fullName || ""}
+          src={shop.avatar || ''}
+          alt={shop.fullName || ''}
           className=" rounded-full bg-gray1"
           width={75}
           height={75}
         />
         <div>
           <p className=" font-medium">
-            {shop.creatorInfo && shop.creatorInfo.fullName
-              ? shop.creatorInfo.fullName
-              : "myshop"}
+            {shop && shop.fullName ? shop.fullName : 'myshop'}
           </p>
           <p className=" text-xs mb-3">
-            {shop.creatorInfo && shop.creatorInfo.email
-              ? shop.creatorInfo.email
-              : "myshop@gmail.com"}
+            {shop && shop.email ? shop.email : 'myshop@gmail.com'}
           </p>
           <div>
             <Button
@@ -39,12 +28,7 @@ function InforShop({ shop }: Props) {
             >
               Nhắn Tin
             </Button>
-            <Button
-              onClick={() => router.push(`/shop/${shop.creatorInfo.id}`)}
-              icon={<IoStorefrontOutline />}
-            >
-              Xem Shop
-            </Button>
+            <Button icon={<IoStorefrontOutline />}>Xem Shop</Button>
           </div>
         </div>
       </div>
@@ -67,7 +51,7 @@ function InforShop({ shop }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default InforShop;
+export default InforShop
