@@ -22,8 +22,19 @@
 }
 body {
   color: #4b4b4b;
+  @apply bg-gray-50;
 }
 
 .border-base-03 {
   @apply border-[0.3px] border-solid border-gray-200;
+}
+
+.ant-menu-overflow-item.ant-menu-item {
+  @apply !text-white;
+}
+.ant-statistic-content-value {
+  @apply !text-white;
+}
+.ant-otp .ant-input {
+  @apply bg-gray3 text-white text-base;
 }

@@ -14,6 +14,8 @@ module.exports = {
       },
       colors: {
         gray1: '#f8f9fa',
+        gray2: '#28272f',
+        gray3: '#37363e',
         primary: 'black',
       },
       boxShadow: {

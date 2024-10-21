@@ -1,18 +1,16 @@
-"use client";
-import { Carousel } from "antd";
-import React from "react";
-import Image from "next/image";
-type Props = {};
+'use client'
+import { Carousel } from 'antd'
+import React from 'react'
+import Image from 'next/image'
+type Props = {}
 
 function MainHeader({}: Props) {
-  const items = [];
+  const items = []
   for (let i = 1; i <= 4; i++) {
-    items.push(`/banner/banner${i}.jpg`);
+    items.push(`/banner/banner${i}.jpg`)
   }
 
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
+  const onChange = (currentSlide: number) => {}
   return (
     <div className=" bg-white">
       <div className=" w-[1280px] mx-auto py-7">
@@ -25,7 +23,7 @@ function MainHeader({}: Props) {
         </Carousel>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainHeader;
+export default MainHeader

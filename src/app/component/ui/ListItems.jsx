@@ -120,7 +120,7 @@ function ListItems({
       <div
         className={`w-[${width || 1280}px]  ${
           col ? `grid-cols-5` : 'grid-cols-6'
-        } gap-3 mt-8 mx-auto ${!loading ? 'grid' : 'flex justify-center items-start h-[200px]'}`}
+        } gap-3 mt-8 mx-auto ${!loading && items.data && items.data.length !== 0 ? 'grid' : 'flex justify-center items-start h-[200px]'}`}
       >
         {loading && <Spin size="large" />}
         {!loading && items.data && items.data.length === 0 && <Empty />}

@@ -1,68 +1,69 @@
-"use client";
-import { IRootState } from "@/app/store/store";
-import { Dropdown, MenuProps, Skeleton } from "antd";
-import Link from "next/link";
-import React, { Suspense, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { FaUser } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-import { FaStore } from "react-icons/fa";
-import { CiLogout } from "react-icons/ci";
-import { IoMdReorder } from "react-icons/io";
-import { logout } from "@/app/store/slice/UserSlice";
-import { useRouter } from "next/navigation";
+'use client'
+import { IRootState } from '@/app/store/store'
+import { Dropdown, MenuProps, Skeleton } from 'antd'
+import Link from 'next/link'
+import React, { Suspense, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { FaUser } from 'react-icons/fa'
+import { FaShoppingCart } from 'react-icons/fa'
+import { FaStore } from 'react-icons/fa'
+import { CiLogout } from 'react-icons/ci'
+import { IoMdReorder } from 'react-icons/io'
+import { logout } from '@/app/store/slice/UserSlice'
+import { useRouter } from 'next/navigation'
+import { FaAngleDown } from 'react-icons/fa6'
 function User() {
-  const dispatch = useDispatch();
-  const user = useSelector((state: IRootState) => state.user.userCurrent);
-  const router = useRouter();
-  const items: MenuProps["items"] = [
+  const dispatch = useDispatch()
+  const user = useSelector((state: IRootState) => state.user.userCurrent)
+  const router = useRouter()
+  const items: MenuProps['items'] = [
     {
-      label: "Thông Tin Tài Khoản",
-      key: "infor",
+      label: 'Thông Tin Tài Khoản',
+      key: 'infor',
       icon: <FaUser />,
-      className: " hover:text-blue-500",
+      className: ' hover:text-blue-500',
       onClick: () => {
-        router.push("/user/me");
+        router.push('/user/me')
       },
     },
     {
-      label: "Giỏ Hàng Của Tôi",
-      key: "cart",
+      label: 'Giỏ Hàng Của Tôi',
+      key: 'cart',
       icon: <FaShoppingCart />,
-      className: " hover:text-blue-500",
+      className: ' hover:text-blue-500',
       onClick: () => {
-        router.push("/cart");
+        router.push('/cart')
       },
     },
     {
-      label: "Cửa Hàng Của Tôi",
-      key: "mystore",
+      label: 'Cửa Hàng Của Tôi',
+      key: 'mystore',
       icon: <FaStore />,
-      className: " hover:text-blue-500",
+      className: ' hover:text-blue-500',
       onClick: () => {
-        router.push("/user/mystore");
+        router.push('/user/mystore')
       },
     },
     {
-      label: "Quản Lý Đơn Hàng",
-      key: "order",
-      className: " hover:text-blue-500",
+      label: 'Quản Lý Đơn Hàng',
+      key: 'order',
+      className: ' hover:text-blue-500',
       icon: <IoMdReorder />,
       onClick: () => {
-        router.push("/user/order");
+        router.push('/user/order')
       },
     },
     {
-      label: "Đăng Xuất",
-      key: "logout",
+      label: 'Đăng Xuất',
+      key: 'logout',
       icon: <CiLogout />,
       danger: true,
       onClick: () => {
-        router.push("/");
-        dispatch(logout());
+        router.push('/')
+        dispatch(logout())
       },
     },
-  ];
+  ]
 
   return (
     <>
@@ -78,13 +79,17 @@ function User() {
         </div>
       ) : (
         <Suspense fallback={<Skeleton avatar />}>
-          <Dropdown menu={{ items }} className=" cursor-pointer">
-            <p>{user?.email}</p>
+          <Dropdown menu={{ items }} className=" cursor-pointer text-sm">
+            <div className=" flex items-center gap-2 bg-white text-gray3 rounded-full py-2 px-3">
+              <FaUser />
+              <p className=" text-nowrap">{user?.fullName}</p>
+              <FaAngleDown />
+            </div>
           </Dropdown>
         </Suspense>
       )}
     </>
-  );
+  )
 }
 
-export default User;
+export default User

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
-    "antd": "^5.12.4",
+    "antd": "^5.21.4",
     "antd-img-crop": "^4.18.0",
     "axios": "^1.6.2",
     "dotenv": "^16.4.5",

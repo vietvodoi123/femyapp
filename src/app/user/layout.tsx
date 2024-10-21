@@ -1,9 +1,16 @@
-import React from "react";
-import UserNav from "../component/user/UserNav";
+import React from 'react'
+import UserNav from '../component/user/UserNav'
+
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Tổng quan tài Khoản - Myshop',
+  description: '...',
+}
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 function layout({ children }: Props) {
   return (
@@ -13,7 +20,7 @@ function layout({ children }: Props) {
         {children}
       </div>
     </main>
-  );
+  )
 }
 
-export default layout;
+export default layout

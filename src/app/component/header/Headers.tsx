@@ -66,7 +66,7 @@ function Headers({}: Props) {
               <IoSearch className=" text-lg text-white" />
             </Button>
           }
-          className=" w-full"
+          className=" w-full "
         />
         <List />
         <Suspense fallback={<p>loading...</p>}>
