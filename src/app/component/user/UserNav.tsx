@@ -1,29 +1,29 @@
-"use client";
-import { MenuItemType } from "antd/es/menu/hooks/useItems";
-import React from "react";
-import Link from "next/link";
-import { FaUser } from "react-icons/fa";
-import { IoMdReorder } from "react-icons/io";
-import { FaStore } from "react-icons/fa";
-import { FaKey } from "react-icons/fa";
-import { Menu } from "antd";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import { IRootState } from "@/app/store/store";
+'use client'
+
+import React from 'react'
+import Link from 'next/link'
+import { FaUser } from 'react-icons/fa'
+import { IoMdReorder } from 'react-icons/io'
+import { FaStore } from 'react-icons/fa'
+import { FaKey } from 'react-icons/fa'
+import { Menu } from 'antd'
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useSelector } from 'react-redux'
+import { IRootState } from '@/app/store/store'
 
 function UserNav() {
-  const pathName = usePathname();
-  const router = useRouter();
+  const pathName = usePathname()
+  const router = useRouter()
 
-  const items: MenuItemType[] = [
+  const items = [
     {
       label: (
         <Link href="/infor" className=" text-slate-300 text-base">
           Thông Tin Tài Khoản
         </Link>
       ),
-      key: "me",
+      key: 'me',
       icon: <FaUser />,
     },
     {
@@ -32,7 +32,7 @@ function UserNav() {
           Quản Lý Đơn Mua
         </Link>
       ),
-      key: "order",
+      key: 'order',
       icon: <IoMdReorder />,
     },
     {
@@ -41,7 +41,7 @@ function UserNav() {
           Cửa Hàng Của Tôi
         </Link>
       ),
-      key: "mystore",
+      key: 'mystore',
       icon: <FaStore />,
     },
     {
@@ -50,21 +50,21 @@ function UserNav() {
           Đổi Mật Khẩu
         </Link>
       ),
-      key: "change_password",
+      key: 'change_password',
       icon: <FaKey />,
     },
-  ];
+  ]
 
   return (
     <Menu
-      selectedKeys={[pathName.split("/")[2]]}
+      selectedKeys={[pathName.split('/')[2]]}
       items={items}
       onClick={(item) => {
-        router.push(`/user/${item.key}`);
+        router.push(`/user/${item.key}`)
       }}
-      className=" border-none bg-gray1"
+      className=" border-base-03 rounded-md shadow-md pt-3"
     />
-  );
+  )
 }
 
-export default UserNav;
+export default UserNav
