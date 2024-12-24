@@ -10,11 +10,11 @@ import Link from 'next/link'
 
 function ListItems({
   pagination = false,
-  nav = undefined,
-  pageSize = undefined,
-  col = undefined,
-  width = undefined,
-  category = undefined,
+  nav = false,
+  pageSize,
+  col,
+  width,
+  category,
   buttonDelivery = false,
 }) {
   const param = useParams()

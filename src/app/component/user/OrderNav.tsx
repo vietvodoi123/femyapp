@@ -1,28 +1,28 @@
-"use client";
-import { Button, Input, Menu } from "antd";
-import { MenuItemType } from "antd/es/menu/hooks/useItems";
-import React, { useEffect, useState } from "react";
-import { IoMdSearch } from "react-icons/io";
+'use client'
+import { Button, Input, Menu } from 'antd'
+
+import React, { useEffect, useState } from 'react'
+import { IoMdSearch } from 'react-icons/io'
 
 type Props = {
-  setOrder: (vlaue: string) => void;
-  setSearchKey: (vlaue: string) => void;
-};
+  setOrder: (vlaue: string) => void
+  setSearchKey: (vlaue: string) => void
+}
 
 function OrderNav({ setOrder, setSearchKey }: Props) {
-  const [selectKey, setSelectKey] = useState<string>("all");
+  const [selectKey, setSelectKey] = useState<string>('all')
   useEffect(() => {
-    setOrder(selectKey);
-  }, [selectKey]);
+    setOrder(selectKey)
+  }, [selectKey])
 
-  const items: MenuItemType[] = [
+  const items = [
     {
       label: (
         <Button type="text" className="">
           Tất cả
         </Button>
       ),
-      key: "all",
+      key: 'all',
     },
     {
       label: (
@@ -30,7 +30,7 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
           Chờ Xử lý
         </Button>
       ),
-      key: "Pending",
+      key: 'Pending',
     },
     {
       label: (
@@ -38,7 +38,7 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
           Đang chuẩn bị hàng
         </Button>
       ),
-      key: "Processing",
+      key: 'Processing',
     },
     {
       label: (
@@ -46,7 +46,7 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
           Đang vận chuyển
         </Button>
       ),
-      key: "Shipped",
+      key: 'Shipped',
     },
 
     {
@@ -55,7 +55,7 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
           Đã giao thành công
         </Button>
       ),
-      key: "Delivered",
+      key: 'Delivered',
     },
     {
       label: (
@@ -63,15 +63,15 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
           Đã hủy
         </Button>
       ),
-      key: "Cancelled",
+      key: 'Cancelled',
     },
-  ];
+  ]
   return (
     <header>
       <Menu
         selectedKeys={[selectKey]}
         onClick={(item) => {
-          setSelectKey(item.key);
+          setSelectKey(item.key)
         }}
         items={items}
         mode="horizontal"
@@ -85,7 +85,7 @@ function OrderNav({ setOrder, setSearchKey }: Props) {
         onChange={(e) => setSearchKey(e.target.value)}
       />
     </header>
-  );
+  )
 }
 
-export default OrderNav;
+export default OrderNav

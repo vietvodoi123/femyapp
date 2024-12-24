@@ -16,7 +16,13 @@ export default function Home() {
         </h3>
       </div>
 
-      <ListItems buttonDelivery={true} />
+      <ListItems
+        buttonDelivery={true}
+        pageSize={undefined}
+        col={undefined}
+        width={undefined}
+        category={undefined}
+      />
     </main>
   )
 }

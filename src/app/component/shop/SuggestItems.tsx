@@ -1,8 +1,8 @@
-"use client";
-import { Button, Spin, message } from "antd";
-import React from "react";
-import { MdOutlineChevronRight } from "react-icons/md";
-import ListItems from "../ui/ListItems";
+'use client'
+import { Button, Spin, message } from 'antd'
+import React from 'react'
+import { MdOutlineChevronRight } from 'react-icons/md'
+import ListItems from '../ui/ListItems'
 
 function SuggestItems() {
   return (
@@ -18,9 +18,15 @@ function SuggestItems() {
           Xem tất cả
         </Button>
       </div>
-      <ListItems category="" pagination={false} />
+      <ListItems
+        category=""
+        pagination={false}
+        pageSize={undefined}
+        col={undefined}
+        width={undefined}
+      />
     </div>
-  );
+  )
 }
 
-export default SuggestItems;
+export default SuggestItems
