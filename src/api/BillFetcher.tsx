@@ -1,22 +1,16 @@
-import axiosClient from "./Fetcher";
+import axiosClient from './Fetcher'
 
 export const BillApi = {
   createBill(body: IBill): Promise<Message> {
-    return axiosClient.post("/bills/", body);
+    return axiosClient.post('/bills/', body)
   },
-  getAllMyBill(
-    userId: string,
-    query: IQueryOrder
-  ): Promise<SuccessResponse<IOrder[]>> {
-    return axiosClient.get(`/bills/user/${userId}`, { params: query });
+  getAllMyBill(query: IQueryOrder): Promise<SuccessResponse<IOrder[]>> {
+    return axiosClient.get(`/bills/user/ibuy`, { params: query })
   },
-  getAllMyStoreBill(
-    shopId: string,
-    query: IQueryOrder
-  ): Promise<SuccessResponse<IOrder[]>> {
-    return axiosClient.get(`/bills/seller/${shopId}`, { params: query });
+  getAllMyStoreBill(query: IQueryOrder): Promise<SuccessResponse<IOrder[]>> {
+    return axiosClient.get(`/bills/isell`, { params: query })
   },
   updateBill(billId: string, body: IQueryOrder): Promise<Message> {
-    return axiosClient.put(`/bills/${billId}`, body);
+    return axiosClient.put(`/bills/${billId}`, body)
   },
-};
+}

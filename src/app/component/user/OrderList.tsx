@@ -22,8 +22,6 @@ function OrderList({ typeOrder, searchKey }: Props) {
   useEffect(() => {
     setLoading(true)
 
-    console.log(user_id)
-
     let query: IQueryOrder = { searchKey: searchKey }
 
     if (typeOrder !== 'all' && typeOrder !== '') {
@@ -32,7 +30,7 @@ function OrderList({ typeOrder, searchKey }: Props) {
 
     if (pathName.split('/')[2] === 'order') {
       if (user_id) {
-        BillApi.getAllMyBill(user_id, query)
+        BillApi.getAllMyBill(query)
           .then((d: SuccessResponse<IOrder[]>) => {
             setOrders(d)
             setLoading(false) // Set loading to false after fetching data
@@ -44,7 +42,7 @@ function OrderList({ typeOrder, searchKey }: Props) {
       }
     } else {
       if (user_id) {
-        BillApi.getAllMyStoreBill(user_id, query)
+        BillApi.getAllMyStoreBill(query)
           .then((d: SuccessResponse<IOrder[]>) => {
             setOrders(d)
             setLoading(false) // Set loading to false after fetching data
